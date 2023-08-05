@@ -141,3 +141,8 @@ export interface Tag {
    */
   color: string
 }
+
+export interface T1 {
+  id: number
+  name: string
+}

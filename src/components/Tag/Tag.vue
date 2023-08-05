@@ -4,7 +4,12 @@
       <u-input @blur="blur" @focus="focus" border="none" type="text" v-model="name" />
     </view>
     <view class="tag__icon">
-      <view @click="changeColor" :style="`background-color:${color}`" class="tag__icon-color" />
+      <view
+        v-if="showColor"
+        @click="changeColor"
+        :style="`background-color:${color}`"
+        class="tag__icon-color"
+      />
       <view class="tag__icon-close">
         <u-icon @click="deleteTag" size="30rpx" color="#fff" name="close"></u-icon>
       </view>
@@ -14,17 +19,21 @@
 
 <script lang="ts" setup>
 import type { Tag } from '@/utils/typings'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const emits = defineEmits<{
   //点击事件
   (e: 'deleteTag'): void
   (e: 'changeColor'): void
-  (e: 'focus', id: number, name: string): void
+  (e: 'focus', id: number, name: string, index: number): void
   (e: 'blur', name: string): void
 }>()
 const props = defineProps<{
   //标签
   tag: Tag
+  //显示颜色
+  showColor: boolean
+  //索引
+  index: number
 }>()
 const color = ref(props.tag.color)
 const name = ref(props.tag.name)
@@ -35,11 +44,17 @@ const changeColor = (): void => {
   emits('changeColor')
 }
 const focus = (): void => {
-  emits('focus', props.tag.id, name.value)
+  emits('focus', props.tag.id, name.value, props.index)
 }
 const blur = (): void => {
   emits('blur', name.value)
 }
+watch(
+  () => props.tag.name,
+  () => {
+    name.value = props.tag.name
+  }
+)
 </script>
 
 <style lang="scss" scoped>

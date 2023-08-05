@@ -78,6 +78,30 @@
       "path": "pages/message/chatbox/itemShare"
     },
     {
+      "path": "pages/user/friends/friends"
+    },
+    {
+      "path": "pages/user/friends/new/new"
+    },
+    {
+      "path": "pages/user/friends/groups/groups"
+    },
+    {
+      "path": "pages/user/friends/detail/detail"
+    },
+    {
+      "path": "pages/user/friends/history/history"
+    },
+    {
+      "path": "pages/user/friends/move/move"
+    },
+    {
+      "path": "pages/user/friends/groups/friends/friends"
+    },
+    {
+      "path": "pages/share/share"
+    },
+    {
       "path": "pages/search/search",
       "style": {
         "enablePullDownRefresh": true

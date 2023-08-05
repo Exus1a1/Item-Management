@@ -331,7 +331,7 @@ import { ref, onMounted, reactive, watch } from 'vue'
 import { useTagStore } from '@/stores/tag'
 import { useSpaceStore } from '@/stores/space'
 import { useFormStore } from '@/stores/form'
-import { onShareAppMessage, onShow } from '@dcloudio/uni-app'
+import { onShow } from '@dcloudio/uni-app'
 import type { ItemForm, RoomForm, imgData } from '@/types/form.d.ts'
 import type { PathData } from '@/types/space.d.ts'
 // 引入组件
@@ -360,13 +360,6 @@ const props = withDefaults(
   }
 )
 
-// 分享时的图片及链接
-onShareAppMessage(() => {
-  return {
-    title: 'shuzhi',
-    imageUrl: 'https://uiadmin.net/uview-plus/components/input.html'
-  }
-})
 onMounted(() => {
   // 开启分享功能
   uni.showShareMenu({

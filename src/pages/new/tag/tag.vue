@@ -10,6 +10,7 @@
         :tag="item"
         @focus="focus"
         @blur="blur"
+        :showColor="true"
       >
       </Tag>
     </view>
@@ -23,10 +24,10 @@
       </view>
       <view class="tags__new-label"> 颜色 </view>
       <view class="tags__new-colors">
-        <view @click="color = '#000'" class="tags__new-colors-unit">
+        <view @click="color = '#000000'" class="tags__new-colors-unit">
           <view class="tags__new-colors-unit-ball" />
           黑色
-          <view v-show="color === '#000'" class="tags__new-colors-unit-tick">
+          <view v-show="color === '#000000'" class="tags__new-colors-unit-tick">
             <u-icon size="25rpx" name="checkmark" color="#fff"></u-icon>
           </view>
         </view>
@@ -75,7 +76,7 @@
       </view>
       <view class="tags__new-submit">
         <u-button @click="showNew = false" text="返回"></u-button>
-        <u-col span="2"></u-col>
+        <u-line color="rgba(255,255,255,0)" direction="col" margin="0 10rpx" />
         <u-button @click="submit" type="primary" text="确认"></u-button>
       </view>
     </view>
@@ -89,7 +90,7 @@
       确认删除?
     </u-modal>
     <u-modal
-      @cancel="showChangeName = false"
+      @cancel="cancelChangeName"
       @confirm="confirmChangeName"
       :showCancelButton="true"
       :show="showChangeName"
@@ -160,9 +161,11 @@ const submit = async () => {
 const color = ref('#000')
 let currentName = ''
 let currentColor = ''
-const focus = (id: number, name: string): void => {
+let currentIndex = 0
+const focus = (id: number, name: string, index: number): void => {
   currentName = name
   currentId = id
+  currentIndex = index
 }
 const showChangeName = ref(false)
 const blur = (name: string): void => {
@@ -181,6 +184,10 @@ const confirmChangeName = async () => {
     }
   }
   showChangeName.value = false
+}
+const cancelChangeName = () => {
+  showChangeName.value = false
+  useTagStore().tagInfo.tagData[currentIndex].name = currentName
 }
 </script>
 
@@ -263,7 +270,8 @@ const confirmChangeName = async () => {
       position: fixed;
       display: flex;
       bottom: 50rpx;
-      transform: translateX(50%);
+      left: 50%;
+      transform: translateX(-50%);
       width: 400rpx;
     }
   }

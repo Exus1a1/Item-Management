@@ -88,6 +88,7 @@
         </view>
       </view>
     </view>
+    <button @click="toFriends">好友</button>
   </view>
 </template>
 
@@ -201,6 +202,12 @@ const goToSettings = (index: number) => {
       })
       break
   }
+}
+
+const toFriends = () => {
+  uni.navigateTo({
+    url: '/pages/user/friends/friends'
+  })
 }
 </script>
 

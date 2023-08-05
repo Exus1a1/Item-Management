@@ -26,6 +26,14 @@ import { useFormStore } from '@/stores/form'
 const useForm = useFormStore()
 const { modifyDeleteItemData, itemData } = useForm
 const showDelete = ref(false)
+import { onShareAppMessage } from '@dcloudio/uni-app'
+onShareAppMessage(() => {
+  return {
+    title: '理物丨向你分享了一件物品',
+    path: `/pages/share/share?id=${useForm.itemData.id}&type=${useForm.itemData.type}`,
+    imageUrl: '/static/plant.png'
+  }
+})
 async function deleteItem() {
   showDelete.value = false
   uni.showToast({
